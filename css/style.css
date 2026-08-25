@@ -1,317 +1,407 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
+/* ==================================================
+   OLED VIRTUAL LAB
+   Estilos principais
+================================================== */
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+* {
+    box-sizing: border-box;
+}
 
-    <title>OLED Virtual Lab</title>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #172033;
+    color: #f1f5f9;
+}
 
-    <link rel="stylesheet" href="css/style.css">
 
-    <!-- Biblioteca para os gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
+/* ==================================================
+   CABEÇALHO
+================================================== */
 
-<body>
+header {
+    text-align: center;
+    padding: 30px 20px 20px;
+}
 
-    <header>
-        <h1>Simulador OLED</h1>
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
 
-        <p>
-            Escolha os materiais do OLED e observe suas propriedades
-            ópticas e elétricas.
-        </p>
-    </header>
+header p {
+    margin-top: 12px;
+    color: #cbd5e1;
+    font-size: 17px;
+}
 
 
-    <main class="simulator">
+/* ==================================================
+   ÁREA PRINCIPAL
+================================================== */
 
-        <!-- ============================= -->
-        <!-- PAINEL DE CONFIGURAÇÃO -->
-        <!-- ============================= -->
+.simulator {
+    max-width: 1450px;
+    margin: auto;
+    padding: 20px 40px 40px;
 
-        <section class="panel controls">
+    display: grid;
+    grid-template-columns: 1.1fr 1.1fr 1.4fr;
+    gap: 28px;
+}
 
-            <h2>Configuração</h2>
 
+/* ==================================================
+   PAINÉIS
+================================================== */
 
-            <label for="anodo">
-                Ânodo
-            </label>
+.panel {
+    background: #293548;
+    border-radius: 18px;
+    padding: 26px;
 
-            <select id="anodo">
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25);
+}
 
-                <option value="ITO">
-                    ITO
-                </option>
+.panel h2 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    font-size: 26px;
+}
 
-                <option value="Graphene">
-                    Grafeno
-                </option>
 
-                <option value="Gold">
-                    Ouro
-                </option>
+/* ==================================================
+   CONFIGURAÇÃO
+================================================== */
 
-            </select>
+.controls label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
 
+    font-size: 17px;
+    font-weight: bold;
+}
 
-            <label for="htl">
-                Camada HTL
-            </label>
 
-            <select id="htl">
+select {
+    width: 100%;
+    padding: 14px;
 
-                <option value="PEDOT:PSS">
-                    PEDOT:PSS
-                </option>
+    border: none;
+    border-radius: 12px;
 
-                <option value="NPB">
-                    NPB
-                </option>
+    background: #3d4b60;
+    color: white;
 
-                <option value="TCTA">
-                    TCTA
-                </option>
+    font-size: 16px;
 
-            </select>
+    cursor: pointer;
+}
 
 
-            <label>
-                Camada Emissora
-            </label>
+/* ==================================================
+   BOTÕES DOS MATERIAIS EMISSORES
+================================================== */
 
+.emitter-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
 
-            <div class="emitter-options">
+    margin-top: 10px;
+}
 
-                <button
-                    class="emitter selected"
-                    data-material="FIrpic"
-                >
 
-                    <span class="color-preview blue"></span>
+.emitter {
+    background: #3d4b60;
 
-                    <span>
-                        FIrpic
-                    </span>
+    border: 2px solid transparent;
 
-                    <small>
-                        Azul
-                    </small>
+    border-radius: 16px;
 
-                </button>
+    padding: 16px;
 
+    color: white;
 
-                <button
-                    class="emitter"
-                    data-material="DCM"
-                >
+    cursor: pointer;
 
-                    <span class="color-preview red"></span>
+    transition: 0.25s;
 
-                    <span>
-                        DCM
-                    </span>
+    display: flex;
+    flex-direction: column;
 
-                    <small>
-                        Vermelho
-                    </small>
+    align-items: center;
 
-                </button>
+    gap: 10px;
+}
 
 
-                <button
-                    class="emitter"
-                    data-material="Alq3"
-                >
+.emitter:hover {
+    transform: translateY(-2px);
 
-                    <span class="color-preview green"></span>
+    background: #46566d;
+}
 
-                    <span>
-                        Alq3
-                    </span>
 
-                    <small>
-                        Verde
-                    </small>
+.emitter.selected {
+    border-color: #60a5fa;
 
-                </button>
+    box-shadow:
+        0 0 15px rgba(96, 165, 250, 0.5);
+}
 
-            </div>
 
+.emitter small {
+    color: #cbd5e1;
 
-            <label for="etl">
-                Camada ETL
-            </label>
+    font-size: 15px;
+}
 
-            <select id="etl">
 
-                <option value="TPBi">
-                    TPBi
-                </option>
+/* Barras coloridas */
 
-                <option value="BPhen">
-                    BPhen
-                </option>
+.color-preview {
+    width: 100%;
 
-                <option value="Alq3">
-                    Alq3
-                </option>
+    height: 42px;
 
-            </select>
+    border-radius: 8px;
 
+    display: block;
+}
 
-            <label for="voltage">
-                Tensão (V)
-            </label>
 
+.blue {
+    background: #3568d4;
+}
 
-            <input
-                type="range"
-                id="voltage"
-                min="0"
-                max="12"
-                step="0.1"
-                value="5"
-            >
 
+.green {
+    background: #22a852;
+}
 
-            <div class="voltage-value">
 
-                <span id="voltageValue">
-                    5.0 V
-                </span>
+.red {
+    background: #ef4444;
+}
 
-            </div>
 
+/* ==================================================
+   CONTROLE DE TENSÃO
+================================================== */
 
-            <button
-                id="simulateButton"
-                class="simulate-button"
-            >
+input[type="range"] {
+    width: 100%;
 
-                Acender OLED
+    margin-top: 12px;
 
-            </button>
+    accent-color: #2f7ed8;
 
-        </section>
+    cursor: pointer;
+}
 
 
+.voltage-value {
+    margin-top: 12px;
 
-        <!-- ============================= -->
-        <!-- PAINEL CENTRAL -->
-        <!-- ============================= -->
+    font-size: 18px;
 
-        <section class="panel oled-panel">
+    font-weight: bold;
+}
 
-            <h2>OLED</h2>
 
+/* ==================================================
+   BOTÃO PRINCIPAL
+================================================== */
 
-            <div
-                class="oled-device"
-                id="oledDevice"
-            >
+.simulate-button {
+    width: 100%;
 
-                <div class="oled-light">
+    margin-top: 28px;
 
-                    OLED
+    padding: 16px;
 
-                </div>
+    border: none;
 
-            </div>
+    border-radius: 12px;
 
+    background: #3568d4;
 
-            <div class="device-info">
+    color: white;
 
-                <p>
+    font-size: 18px;
 
-                    <strong>Material:</strong>
+    cursor: pointer;
 
-                    <span id="materialInfo">
-                        FIrpic
-                    </span>
+    transition: 0.25s;
+}
 
-                </p>
 
+.simulate-button:hover {
+    background: #4a7ee8;
 
-                <p>
+    transform: translateY(-2px);
+}
 
-                    <strong>Comprimento de onda:</strong>
 
-                    <span id="wavelengthInfo">
-                        470 nm
-                    </span>
+/* ==================================================
+   OLED CENTRAL
+================================================== */
 
-                </p>
+.oled-panel {
+    text-align: center;
+}
 
 
-                <p>
+.oled-device {
+    width: 100%;
 
-                    <strong>Tensão aplicada:</strong>
+    height: 360px;
 
-                    <span id="deviceVoltageInfo">
-                        5.0 V
-                    </span>
+    margin-top: 20px;
 
-                </p>
+    border-radius: 55px;
 
-            </div>
+    background: #1f6a8c;
 
-        </section>
+    display: flex;
 
+    align-items: center;
 
+    justify-content: center;
 
-        <!-- ============================= -->
-        <!-- GRÁFICOS -->
-        <!-- ============================= -->
+    border: 3px solid rgba(0, 0, 0, 0.25);
 
-        <section class="charts-panel">
+    transition: 0.6s;
+}
 
 
-            <div class="panel chart-container">
+.oled-light {
+    width: 180px;
 
-                <h2>
-                    Espectro de Eletroluminescência
-                </h2>
+    height: 250px;
 
-                <canvas
-                    id="spectrumChart"
-                ></canvas>
+    background: #111827;
 
-            </div>
+    display: flex;
 
+    align-items: center;
 
-            <div class="panel chart-container">
+    justify-content: center;
 
-                <h2>
-                    Curva I × V
-                </h2>
+    border-radius: 6px;
 
-                <canvas
-                    id="ivChart"
-                ></canvas>
+    color: white;
 
-            </div>
+    font-size: 24px;
 
+    font-weight: bold;
 
-        </section>
+    transition: 0.6s;
+}
 
-    </main>
 
+.device-info {
+    margin-top: 22px;
 
-    <footer>
+    text-align: left;
 
-        OLED Virtual Lab • Simulador Educacional
+    font-size: 17px;
 
-    </footer>
+    line-height: 1.8;
+}
 
 
-    <script src="js/oled.js"></script>
+/* ==================================================
+   GRÁFICOS
+================================================== */
 
-    <script src="js/charts.js"></script>
+.charts-panel {
+    display: flex;
 
-    <script src="js/app.js"></script>
+    flex-direction: column;
 
-</body>
-</html>
+    gap: 28px;
+}
+
+
+.chart-container {
+    background: #293548;
+
+    min-height: 350px;
+}
+
+
+.chart-container h2 {
+    text-align: center;
+
+    font-size: 22px;
+}
+
+
+.chart-container canvas {
+    width: 100% !important;
+
+    max-height: 270px;
+}
+
+
+/* ==================================================
+   RODAPÉ
+================================================== */
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
+
+@media (max-width: 1100px) {
+
+    .simulator {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .charts-panel {
+        grid-column: 1 / -1;
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 750px) {
+
+    .simulator {
+        grid-template-columns: 1fr;
+
+        padding: 15px;
+    }
+
+    .charts-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .emitter-options {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+}
