@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OLED Virtual Lab</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Biblioteca para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Simulador OLED</h1>
+
+        <p>
+            Escolha os materiais do OLED e observe suas propriedades
+            ópticas e elétricas.
+        </p>
+    </header>
+
+
+    <main class="simulator">
+
+        <!-- ============================= -->
+        <!-- PAINEL DE CONFIGURAÇÃO -->
+        <!-- ============================= -->
+
+        <section class="panel controls">
+
+            <h2>Configuração</h2>
+
+
+            <label for="anodo">
+                Ânodo
+            </label>
+
+            <select id="anodo">
+
+                <option value="ITO">
+                    ITO
+                </option>
+
+                <option value="Graphene">
+                    Grafeno
+                </option>
+
+                <option value="Gold">
+                    Ouro
+                </option>
+
+            </select>
+
+
+            <label for="htl">
+                Camada HTL
+            </label>
+
+            <select id="htl">
+
+                <option value="PEDOT:PSS">
+                    PEDOT:PSS
+                </option>
+
+                <option value="NPB">
+                    NPB
+                </option>
+
+                <option value="TCTA">
+                    TCTA
+                </option>
+
+            </select>
+
+
+            <label>
+                Camada Emissora
+            </label>
+
+
+            <div class="emitter-options">
+
+                <button
+                    class="emitter selected"
+                    data-material="FIrpic"
+                >
+
+                    <span class="color-preview blue"></span>
+
+                    <span>
+                        FIrpic
+                    </span>
+
+                    <small>
+                        Azul
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="emitter"
+                    data-material="DCM"
+                >
+
+                    <span class="color-preview red"></span>
+
+                    <span>
+                        DCM
+                    </span>
+
+                    <small>
+                        Vermelho
+                    </small>
+
+                </button>
+
+
+                <button
+                    class="emitter"
+                    data-material="Alq3"
+                >
+
+                    <span class="color-preview green"></span>
+
+                    <span>
+                        Alq3
+                    </span>
+
+                    <small>
+                        Verde
+                    </small>
+
+                </button>
+
+            </div>
+
+
+            <label for="etl">
+                Camada ETL
+            </label>
+
+            <select id="etl">
+
+                <option value="TPBi">
+                    TPBi
+                </option>
+
+                <option value="BPhen">
+                    BPhen
+                </option>
+
+                <option value="Alq3">
+                    Alq3
+                </option>
+
+            </select>
+
+
+            <label for="voltage">
+                Tensão (V)
+            </label>
+
+
+            <input
+                type="range"
+                id="voltage"
+                min="0"
+                max="12"
+                step="0.1"
+                value="5"
+            >
+
+
+            <div class="voltage-value">
+
+                <span id="voltageValue">
+                    5.0 V
+                </span>
+
+            </div>
+
+
+            <button
+                id="simulateButton"
+                class="simulate-button"
+            >
+
+                Acender OLED
+
+            </button>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- PAINEL CENTRAL -->
+        <!-- ============================= -->
+
+        <section class="panel oled-panel">
+
+            <h2>OLED</h2>
+
+
+            <div
+                class="oled-device"
+                id="oledDevice"
+            >
+
+                <div class="oled-light">
+
+                    OLED
+
+                </div>
+
+            </div>
+
+
+            <div class="device-info">
+
+                <p>
+
+                    <strong>Material:</strong>
+
+                    <span id="materialInfo">
+                        FIrpic
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>Comprimento de onda:</strong>
+
+                    <span id="wavelengthInfo">
+                        470 nm
+                    </span>
+
+                </p>
+
+
+                <p>
+
+                    <strong>Tensão aplicada:</strong>
+
+                    <span id="deviceVoltageInfo">
+                        5.0 V
+                    </span>
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ============================= -->
+        <!-- GRÁFICOS -->
+        <!-- ============================= -->
+
+        <section class="charts-panel">
+
+
+            <div class="panel chart-container">
+
+                <h2>
+                    Espectro de Eletroluminescência
+                </h2>
+
+                <canvas
+                    id="spectrumChart"
+                ></canvas>
+
+            </div>
+
+
+            <div class="panel chart-container">
+
+                <h2>
+                    Curva I × V
+                </h2>
+
+                <canvas
+                    id="ivChart"
+                ></canvas>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        OLED Virtual Lab • Simulador Educacional
+
+    </footer>
+
+
+    <script src="js/oled.js"></script>
+
+    <script src="js/charts.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+</html>
